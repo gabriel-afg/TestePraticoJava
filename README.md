@@ -1,4 +1,18 @@
-# Teste Pratico Java 
+# Teste Pratico Java - Desenvolvedor Backend 
+
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
+## Instalação
+
+1. Clone o repositório
+```bash
+  git clone https://github.com/gabriel-afg/TestePraticoJava.git
+```
+
+2. Abra o projeto em sua IDE de preferência
+3. Execute o projeto
+
+
+## Requisitos funcionais
 - [x] Um método que receba uma lista de funcionários, mês e ano e retorne o valor total 
 pago (salário e benefício) a esses funcionários no mês.
 
