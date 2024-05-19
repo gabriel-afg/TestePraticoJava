@@ -22,4 +22,9 @@ public class Vendas {
         }
         return 0.0; // Retorne 0.0 se o funcionário não for um vendedor
     }
+
+    public boolean temDadosParaMesAno(int mes, int ano) {
+        LocalDate data = LocalDate.of(ano, mes, 1);
+        return vendasVendedores.values().stream().anyMatch(vendas -> vendas.containsKey(data));
+    }
 }

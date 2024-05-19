@@ -2,37 +2,51 @@ import Entities.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         List<Funcionarios> listaFuncionarios = criarListaFuncionarios();
         Vendas vendas = DadosVendas.inicializarVendas();
 
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Digite o mês (como um número de 1 a 12):");
+        int mes = scanner.nextInt();
+
+        System.out.println("Digite o ano (como um número de 4 dígitos):");
+        int ano = scanner.nextInt();
+
+        if (!vendas.temDadosParaMesAno(mes, ano)) {
+            System.out.println("Não existem dados para o mês e ano fornecidos.");
+            return;
+        }
+
         System.out.println("-------------------");
         //Um método que receba uma lista de funcionários, mês e ano e retorne o valor total
         //pago (salário e benefício) a esses funcionários no mês.
-        double totalPago = calcularTotalPago(listaFuncionarios, 4, 2022, vendas);
+        double totalPago = calcularTotalPago(listaFuncionarios, mes, ano, vendas);
         System.out.println("Total Pago para todos os funcionários: R$ " + totalPago);
 
         System.out.println("-------------------");
 
         //Um método que receba uma lista de funcionários, mês e ano e retorne o total pago
         //somente em salários no mês.
-        double totalSalarios = calcularTotalSalarios(listaFuncionarios,4, 2022);
+        double totalSalarios = calcularTotalSalarios(listaFuncionarios,mes, ano);
         System.out.println("Total Pago em Salários para todos os funcionários: R$ " + totalSalarios);
 
         System.out.println("-------------------");
 
         //Um método que receba uma lista somente com os funcionários que recebem
         //benefícios, mês e ano e retorne o total pago em benefícios no mês.
-        double totalBeneficios = calcularTotalPagoBeneficios(listaFuncionarios, 4, 2022, vendas);
+        double totalBeneficios = calcularTotalPagoBeneficios(listaFuncionarios, mes, ano, vendas);
         System.out.println("Total Pago em Benefícios para Secretários e Vendedores: R$ " + totalBeneficios);
 
         System.out.println("-------------------");
 
         // Um método que receba uma lista de funcionários, mês e ano e retorne o que
         //recebeu o valor mais alto no mês.
-        Funcionarios funcionarioMaiorValor = encontrarFuncionarioMaiorValor(listaFuncionarios, 4, 2022, vendas);
+        Funcionarios funcionarioMaiorValor = encontrarFuncionarioMaiorValor(listaFuncionarios, mes, ano, vendas);
 
         if (funcionarioMaiorValor != null) {
             System.out.println("Funcionário que recebeu o valor mais alto: " + funcionarioMaiorValor.getNome());
@@ -45,14 +59,14 @@ public class Main {
         //Um método que receba uma lista somente com os funcionários que recebem
         //benefícios, mês e ano e retorne o nome do funcionário que recebeu o valor mais
         //alto em benefícios no mês.
-        String funcionarioMaiorBeneficio = encontrarFuncionarioMaiorBeneficio(listaFuncionarios, 4, 2022, vendas);
+        String funcionarioMaiorBeneficio = encontrarFuncionarioMaiorBeneficio(listaFuncionarios, mes, ano, vendas);
         System.out.println("Funcionário que recebeu o valor mais alto em Benefícios: " + funcionarioMaiorBeneficio);
 
         System.out.println("-------------------");
 
         // Um método que receba uma lista de vendedores, mês e ano e retorne o que mais
         //vendeu no mês.
-        String vendedorMaisVendeu = encontrarVendedorMaisVendeu(listaFuncionarios, 4, 2022, vendas);
+        String vendedorMaisVendeu = encontrarVendedorMaisVendeu(listaFuncionarios, mes, ano, vendas);
 
         if (vendedorMaisVendeu != null) {
             System.out.println("Vendedor que mais vendeu: " + vendedorMaisVendeu);
@@ -66,9 +80,9 @@ public class Main {
         for (Funcionarios funcionario : listaFuncionarios) {
             System.out.println(
                     funcionario.getNome() +
-                            ", Salario: "+ funcionario.calcularSalario(4, 2022) +
-                            ", Beneficio: " +  funcionario.calcularBeneficio(4, 2022, vendas) +
-                            ", anos: " + funcionario.anosDeServico(4, 2022)
+                            ", Salario: "+ funcionario.calcularSalario(mes, ano) +
+                            ", Beneficio: " +  funcionario.calcularBeneficio(mes, ano, vendas) +
+                            ", anos: " + funcionario.anosDeServico(mes, ano)
             );
         }
     }
